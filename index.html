@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mô phỏng phân nhóm K-Means</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px"><h1>Mô phỏng phân nhóm K-Means</h1><div class="row" style="flex:none;width:auto"><button style="flex:none;min-height:48px" onclick="openHelp()">📖 Giải thích thuật toán</button><button id="fs" style="flex:none;min-height:48px" onclick="toggleFS()">⛶ Toàn màn hình</button><button style="flex:none;min-height:48px" onclick="openSet()">⚙ Cài đặt</button></div></div>
+<main>
+  <div id="wrap"><canvas id="cv"></canvas><div id="info"></div><button id="closeall" onclick="hideInfo()">✕ Tắt tất cả</button><div id="toast"></div></div>
+  <aside>
+    <div class="box" id="msg"><div id="mh">Chào mừng</div><div id="mb">Chạm vào màn hình để thêm điểm, hoặc chọn dữ liệu mẫu bên dưới.</div></div>
+    <div class="box"><b>Các nhóm</b><div id="list" class="hint">Chưa có nhóm nào.</div></div>
+    <div class="box"><b>Chạy thuật toán</b>
+      <div class="row">
+        <button id="backbtn" onclick="back()">◀ Quay lại</button>
+        <button class="main" id="stepbtn" onclick="step()">Bước tiếp</button>
+        <button id="auto" onclick="toggleAuto()">Chạy tự động</button>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <button onclick="restart()">Làm lại</button>
+        <button onclick="clearAll()">Xóa hết</button>
+        <button id="skipbtn" style="opacity:.45;padding:8px 8px" onclick="doSkip()" title="Chuyển ngay đến kết quả của bước đang chạy">⏭ Bỏ qua</button>
+      </div>
+      <button id="gtb" style="display:none;width:100%;margin-top:8px" onclick="openGt()">📊 Lập bảng số liệu ghép nhóm</button>
+    </div>
+    <div class="box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="margin:0">Dữ liệu</b><button style="flex:none;min-height:40px;padding:4px 14px;font-size:calc(16px*var(--fz))" onclick="openPc()">🔧 Cấu hình</button></div>
+      <div class="row">
+        <button onclick="load('d8')">Cỡ áo</button>
+        <button onclick="load('d9')">Mua xăng</button>
+        <button onclick="load('free')">Tự chấm điểm</button>
+      </div>
+    </div>
+    <div class="box"><b>Số nhóm K</b>
+      <div class="row"><button class="sq" onclick="setK(-1)" aria-label="Giảm K">−</button><span id="kval">3</span><button class="sq" onclick="setK(1)" aria-label="Tăng K">+</button></div>
+    </div>
+  </aside>
+</main>
+<div id="set" onclick="if(event.target===this)closeSet()"><div id="sp">
+<div id="sh"><b>⚙ Cài đặt</b><button style="flex:none;min-height:48px" onclick="closeSet()">Đóng ✕</button></div>
+<div id="sb">
+<div class="srow"><span>Cỡ chữ</span><div class="row"><button class="sq" onclick="setFz(-1)" aria-label="Giảm cỡ chữ">A−</button><span id="fzv">100%</span><button class="sq" onclick="setFz(1)" aria-label="Tăng cỡ chữ">A+</button></div></div>
+<div class="srow"><span>Tốc độ</span><div class="row"><button class="sq" onclick="setSpd(-1)" aria-label="Chậm lại">−</button><span id="spv" style="min-width:64px;text-align:center">1×</span><button class="sq" onclick="setSpd(1)" aria-label="Nhanh hơn">+</button></div></div>
+<div class="srow"><span>Âm thanh</span><button id="snd" onclick="toggleSnd()">🔊 Bật</button></div>
+<div class="srow" style="justify-content:center"><button style="flex:none" onclick="resetSet()">Khôi phục mặc định</button></div>
+</div></div></div>
+<div id="pcm" onclick="if(event.target===this)closePc()"><div id="sp2">
+<div id="sh2"><b>🔧 Cấu hình dữ liệu mẫu</b><button style="flex:none;min-height:48px" onclick="closePc()">Đóng ✕</button></div>
+<div id="sb2">
+<div class="srow"><span>Số điểm mỗi nhóm</span><input id="npi" type="number" inputmode="numeric" min="2" max="33333" step="1" oninput="setNpgV(this.value,false)" onchange="setNpgV(this.value,true)" onfocus="this.select()"></div>
+<div class="srow" style="display:flex;flex-wrap:wrap;gap:8px"><button style="min-height:48px" onclick="setNpgV(10,true)">10</button><button style="min-height:48px" onclick="setNpgV(100,true)">100</button><button style="min-height:48px" onclick="setNpgV(1000,true)">1 000</button><button style="min-height:48px" onclick="setNpgV(10000,true)">10 000</button><button style="min-height:48px" onclick="setNpgV(33333,true)">33 333 (≈100 nghìn)</button></div>
+</div></div></div>
+<div id="gt" onclick="if(event.target===this)closeGt()"><div id="gp"><div id="gh"><b>📊 Bảng số liệu ghép nhóm</b><button style="flex:none;min-height:48px" onclick="closeGt()">Đóng ✕</button></div><div id="gb"></div></div></div>
+<div id="help" onclick="if(event.target===this)closeHelp()"><div id="hp">
+<div id="hh"><b>📖 Giải thích thuật toán K-Means</b><button style="flex:none;min-height:48px" onclick="closeHelp()">Đóng ✕</button></div>
+<div id="hb">
+<h2>1. K-Means dùng để làm gì?</h2>
+<p>Có một đám dữ liệu lộn xộn và ta muốn <b>chia thành K nhóm</b>, mỗi nhóm gồm những đối tượng <b>giống nhau, ở gần nhau</b>. Ví dụ: công ty may có số đo của 100 000 học sinh và muốn chia thành các cỡ áo S, M, L. Không ai chia bằng tay, máy tự làm bằng K-Means. Chữ <b>K</b> là số nhóm mà con người muốn chia.</p>
+<h2>2. Biến dữ liệu thành điểm trên mặt phẳng</h2>
+<p>Mỗi học sinh có hai số: (chiều cao; cân nặng). Cặp số đó là tọa độ của <b>một điểm</b>. Hai bạn có số đo giống nhau thì hai điểm nằm gần nhau. Vì vậy "giống nhau" được hiểu là "gần nhau".</p>
+<h2>3. Hai công cụ Toán được dùng</h2>
+<div class="ex"><b>Khoảng cách</b> giữa A(x₁; y₁) và B(x₂; y₂): d = √[(x₂ − x₁)² + (y₂ − y₁)²]. Dùng để biết điểm nào <b>gần tâm nào hơn</b>.<br><b>Trung bình cộng</b>: x̄ = (x₁ + x₂ + … + xₙ) : n. Tâm của một nhóm có hoành độ bằng trung bình các hoành độ, tung độ bằng trung bình các tung độ.</div>
+<h2>4. Thuật toán gồm 3 bước, lặp lại nhiều vòng</h2>
+<ol>
+<li><b>Chọn ngẫu nhiên K điểm làm "tâm nhóm"</b> (ô vuông lớn). Máy chưa biết nhóm nằm ở đâu nên chọn đại.</li>
+<li><b>Mỗi điểm chọn tâm gần nhất</b>: tính khoảng cách từ điểm đến K tâm, chọn tâm gần nhất và nhận màu của tâm đó.</li>
+<li><b>Dời tâm</b>: mỗi tâm dời về vị trí trung bình cộng của các điểm cùng màu.</li>
+</ol>
+<p>Sau đó quay lại bước 2 (vì tâm đã đổi chỗ, có điểm sẽ đổi nhóm). Lặp đến khi <b>tâm không dịch chuyển nữa</b>: thuật toán hội tụ và việc chia nhóm ổn định.</p>
+<h2>5. Ví dụ tính tay</h2>
+<div class="ex">4 điểm A(1; 1), B(2; 1), C(8; 8), D(9; 9). Chọn K = 2, lấy A và C làm tâm ban đầu.<br>
+<b>Chọn tâm gần nhất:</b> B cách A là 1, cách C là √85 ≈ 9,2, nên B về nhóm A. D cách C là √2 ≈ 1,4, cách A là √128 ≈ 11,3, nên D về nhóm C. Được {A, B} và {C, D}.<br>
+<b>Dời tâm:</b> tâm nhóm 1 = ((1+2):2; (1+1):2) = (1,5; 1). Tâm nhóm 2 = ((8+9):2; (8+9):2) = (8,5; 8,5).<br>
+<b>Lặp lại:</b> tính lại khoảng cách thì không điểm nào đổi nhóm, tâm không đổi nữa nên dừng.</div>
+<h2>6. Liên hệ với Toán 11 và lưu ý</h2>
+<ul>
+<li>Sau khi máy chia nhóm, ta dùng các số đặc trưng đã học (<b>số trung bình, trung vị, khoảng biến thiên, độ lệch chuẩn</b>) để mô tả từng nhóm: nhóm nào đông, nhóm nào tập trung, nhóm nào trải rộng.</li>
+<li>Khác với ghép nhóm số liệu: khi ghép nhóm, <b>con người</b> tự chia các khoảng. Với K-Means, <b>máy tự tìm</b> cách chia dựa trên khoảng cách.</li>
+<li>K do con người chọn. Chọn K quá nhỏ thì gộp lẫn, quá lớn thì chia vụn.</li>
+<li>Tâm ban đầu chọn ngẫu nhiên nên mỗi lần chạy có thể cho kết quả hơi khác nhau.</li>
+</ul>
+<h2>7. Câu hỏi suy nghĩ</h2>
+<ol>
+<li>AI dựa vào tiêu chí nào để quyết định một điểm thuộc nhóm này mà không phải nhóm kia?</li>
+<li>Nếu đổi K từ 2 thành 4 thì các nhóm thay đổi thế nào?</li>
+<li>Biết tâm và số đặc trưng của mỗi nhóm thì người làm kinh doanh ra được quyết định gì?</li>
+</ol>
+</div></div></div>
+<script src="script.js"></script>
+</body>
+</html>
