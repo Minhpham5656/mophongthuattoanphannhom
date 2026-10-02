@@ -1,9 +1,25 @@
-var COL=['#e5383b','#12b886','#f59f00','#1c7ed6','#9c36d9','#f0359b'];
-var RG={
- d8:{x:[145,185],y:[35,80],xl:'Chiều cao (cm)',yl:'Cân nặng (kg)',u:['cm','kg']},
- d9:{x:[0,40],y:[0,20],xl:'Lượng xăng mỗi lần đổ (lít)',yl:'Số lần đổ / tháng',u:['lít','lần']},
- free:null
+var COL=['#e5383b','#12b886','#f59f00','#1c7ed6','#9c36d9','#f0359b','#74b816','#15aabf','#8d5a2b','#e8590c','#364fc7','#087f5b','#c2255c','#7048e8','#5c940d','#0b4f6c'],MAXK=COL.length;
+var RG={free:{x:[0,10],y:[0,10],xl:'x',yl:'y',u:['',''],s:[1,1]}};
+/* Mẫu có sẵn: x,y = khoảng trục; c = tâm các nhóm; s = độ lệch; d = số chữ số thập phân của (x,y) */
+var PS={
+ d8:{e:'👕',n:'Cỡ áo',x:[145,185],y:[35,80],xl:'Chiều cao (cm)',yl:'Cân nặng (kg)',u:['cm','kg'],c:[[155,45],[163,53],[171,63]],s:[3,3],d:[1,1]},
+ d9:{e:'⛽',n:'Mua xăng',x:[0,40],y:[0,20],xl:'Lượng xăng mỗi lần đổ (lít)',yl:'Số lần đổ / tháng',u:['lít','lần'],c:[[5,3],[30,3],[18,14]],s:[3,1.6],d:[1,1]},
+ gy:{e:'👟',n:'Cỡ giày',x:[20,30],y:[7,12],xl:'Chiều dài bàn chân (cm)',yl:'Chiều rộng bàn chân (cm)',u:['cm','cm'],c:[[22.5,8.2],[25,9.3],[27.5,10.4]],s:[.5,.3],d:[1,1]},
+ dm:{e:'📘',n:'Điểm Toán và Ngữ văn',x:[0,10],y:[0,10],xl:'Điểm Toán',yl:'Điểm Ngữ văn',u:['điểm','điểm'],c:[[8.8,8.6],[8.6,5],[5,8.6],[5,5]],s:[.6,.6],d:[1,1]},
+ tt:{e:'⏰',n:'Giờ tự học và điểm TB',x:[0,30],y:[3,10],xl:'Thời gian tự học (giờ/tuần)',yl:'Điểm trung bình',u:['giờ','điểm'],c:[[4,5.4],[12,7],[22,8.8]],s:[1.8,.45],d:[1,1]},
+ ts:{e:'🧋',n:'Khách quán trà sữa',x:[0,30],y:[0,150],xl:'Số lần mua mỗi tháng',yl:'Chi tiêu mỗi lần (nghìn đồng)',u:['lần','nghìn đồng'],c:[[3,35],[15,55],[8,115]],s:[1.4,8],d:[0,0]},
+ tq:{e:'🌦',n:'Thời tiết theo mùa',x:[5,40],y:[30,100],xl:'Nhiệt độ (°C)',yl:'Độ ẩm (%)',u:['°C','%'],c:[[13,78],[20,90],[31,84],[25,68]],s:[2,3.5],d:[1,0]},
+ ch:{e:'🏃',n:'Buổi chạy bộ',x:[0,16],y:[80,200],xl:'Quãng đường chạy (km)',yl:'Nhịp tim trung bình (lần/phút)',u:['km','lần/phút'],c:[[3,115],[11,140],[5,175]],s:[.8,6],d:[1,0]},
+ dt:{e:'📱',n:'Dùng điện thoại mỗi tháng',x:[0,60],y:[0,600],xl:'Dung lượng data (GB/tháng)',yl:'Thời gian gọi (phút/tháng)',u:['GB','phút'],c:[[6,60],[40,90],[15,420]],s:[3,35],d:[1,0]},
+ dg:{e:'💡',n:'Hộ gia đình dùng điện',x:[1,8],y:[0,500],xl:'Số người trong hộ',yl:'Điện tiêu thụ (kWh/tháng)',u:['người','kWh'],c:[[2,110],[4,250],[6,400]],s:[.5,35],d:[0,0]},
+ cam:{e:'🍊',n:'Phân loại cam',x:[4,10],y:[50,350],xl:'Đường kính quả (cm)',yl:'Khối lượng quả (g)',u:['cm','g'],c:[[6,100],[7.3,170],[8.6,260]],s:[.3,14],d:[1,0]},
+ dh:{e:'🚲',n:'Đi học mỗi ngày',x:[0,15],y:[0,60],xl:'Khoảng cách nhà đến trường (km)',yl:'Thời gian đi (phút)',u:['km','phút'],c:[[1,14],[4,20],[11,35]],s:[.45,3],d:[1,0]},
+ gn:{e:'😴',n:'Giấc ngủ và điện thoại',x:[4,11],y:[0,10],xl:'Giờ ngủ mỗi đêm (giờ)',yl:'Giờ dùng điện thoại mỗi ngày (giờ)',u:['giờ','giờ'],c:[[8.6,1.5],[7.2,4],[5.8,7]],s:[.35,.6],d:[1,1]},
+ pt:{e:'🏠',n:'Phòng trọ',x:[10,50],y:[0,6],xl:'Diện tích phòng (m²)',yl:'Giá thuê (triệu đồng/tháng)',u:['m²','triệu đồng'],c:[[15,1.2],[25,2.4],[40,4.2]],s:[2,.3],d:[1,1]}
 };
+Object.keys(PS).forEach(function(k){var P=PS[k];RG[k]={x:P.x,y:P.y,xl:P.xl,yl:P.yl,u:P.u,dp:P.d}});
+var AX={n:['x','y'],u:['',''],cu:[false,false],a:['0','0'],b:['10','10'],s:['1','1']};
+var UN=['','cm','m','km','kg','g','giây','phút','giờ','ngày','tháng','năm','tuổi','°C','%','điểm','đồng','nghìn đồng','triệu đồng','lít','người','lần'];
 var hist=[],pts=[],cen=[],rip=[],K=3,phase=0,iter=0,ds='free',auto=false,done=false,busy=false,spot=-1,tw=0;
 var cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 var W=0,H=0,ML=64,MB=54,MT=14,MR=16,fz=1,npg=10,LG=3000,MAXG=33333,layer=null,lk='',pv=0;
@@ -19,6 +35,8 @@ function resize(){
 function px(n){return ML+n*(W-ML-MR)}
 function py(n){return H-MB-n*(H-MB-MT)}
 function gauss(){var u=1-Math.random(),v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function up(g,i){return g&&g.u[i]?' ('+g.u[i]+')':''}
+function tu(g){return g&&(g.u[0]||g.u[1])?' theo ('+(g.u[0]||'x')+', '+(g.u[1]||'y')+')':''}
 function real(v,i){var g=RG[ds];if(!g)return null;var a=i?g.y:g.x;return a[0]+v*(a[1]-a[0])}
 function norm(v,i){var g=RG[ds],a=i?g.y:g.x;return Math.min(.98,Math.max(.02,(v-a[0])/(a[1]-a[0])))}
 
@@ -61,8 +79,8 @@ function openHelp(){document.getElementById('help').classList.add('on')}
 function closeHelp(){document.getElementById('help').classList.remove('on')}
 function openSet(){document.getElementById('set').classList.add('on')}
 function closeSet(){document.getElementById('set').classList.remove('on')}
-function saveSet(){try{localStorage.setItem('kmeansSet',JSON.stringify({fz:fz,snd:snd,npg:npg,spd:spd}))}catch(e){}}
-function loadSet(){try{var v=JSON.parse(localStorage.getItem('kmeansSet')||'{}');if(v.fz)fz=Math.max(.7,Math.min(1.6,+v.fz||1));if(v.snd===false)snd=false;if(SPD.indexOf(+v.spd)>=0)spd=+v.spd;if(v.npg)npg=Math.max(2,Math.min(MAXG,+v.npg||10))}catch(e){}}
+function saveSet(){try{localStorage.setItem('kmeansSet',JSON.stringify({fz:fz,snd:snd,npg:npg,spd:spd,ax:AX}))}catch(e){}}
+function loadSet(){try{var v=JSON.parse(localStorage.getItem('kmeansSet')||'{}');if(v.fz)fz=Math.max(.7,Math.min(1.6,+v.fz||1));if(v.snd===false)snd=false;if(SPD.indexOf(+v.spd)>=0)spd=+v.spd;if(v.ax&&v.ax.n&&v.ax.a&&v.ax.b&&v.ax.s&&v.ax.u&&v.ax.cu)AX=v.ax;if(v.npg)npg=Math.max(2,Math.min(MAXG,+v.npg||10))}catch(e){}}
 function applyFz(){
   document.documentElement.style.setProperty('--fz',fz);
   ML=Math.round(64*fz);MB=Math.round(54*fz);
@@ -70,7 +88,41 @@ function applyFz(){
   document.getElementById('snd').textContent=snd?'🔊 Bật':'🔇 Tắt';
   applySpd();updNp();resize();renderInfo();
 }
-function openPc(){document.getElementById('pcm').classList.add('on')}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function num(t){return parseFloat(String(t).replace(',','.'))}
+function bad(k,v){var e=document.getElementById('ax-'+k);if(e)e.classList.toggle('bad',v)}
+function applyAx(ns){
+  var cur=RG.free,g={x:cur.x.slice(),y:cur.y.slice(),u:[String(AX.u[0]).trim(),String(AX.u[1]).trim()],s:[0,0]},nm=[],i;
+  for(i=0;i<2;i++){
+    var a=num(AX.a[i]),b=num(AX.b[i]),s=num(AX.s[i]),ok=isFinite(a)&&isFinite(b)&&b-a>=1,blank=String(AX.s[i]).trim()==='',so=blank||(isFinite(s)&&s>0);
+    bad('a'+i,!ok);bad('b'+i,!ok);bad('s'+i,!so);
+    if(ok)g[i?'y':'x']=[a,b];
+    g.s[i]=so&&!blank?s:0;
+    nm[i]=String(AX.n[i]).trim()||(i?'y':'x');
+  }
+  g.xl=nm[0]+(g.u[0]?' ('+g.u[0]+')':'');g.yl=nm[1]+(g.u[1]?' ('+g.u[1]+')':'');
+  RG.free=g;if(!ns)saveSet();
+}
+function axSet(k,i,v){AX[k][i]=v;applyAx()}
+function axUnit(i,v){if(v==='__c'){AX.cu[i]=true;AX.u[i]=''}else{AX.cu[i]=false;AX.u[i]=v}applyAx();axForm()}
+function axReset(){AX={n:['x','y'],u:['',''],cu:[false,false],a:['0','0'],b:['10','10'],s:['1','1']};applyAx();axForm()}
+function axForm(){
+  var el=document.getElementById('axf');if(!el)return;
+  var h='<div class="axg"><span></span><b>Trục x (ngang)</b><b>Trục y (dọc)</b>';
+  var row=function(lb,f){return '<span>'+lb+'</span>'+f(0)+f(1)};
+  var inp=function(k,i,ph){return '<input id="ax-'+k+i+'" type="text" inputmode="decimal" value="'+esc(AX[k][i])+'" placeholder="'+ph+'" oninput="axSet(\''+k+'\','+i+',this.value)" onfocus="this.select()">'};
+  h+=row('Tên trục',function(i){return '<input type="text" value="'+esc(AX.n[i])+'" oninput="axSet(\'n\','+i+',this.value)" onfocus="this.select()">'});
+  h+=row('Đơn vị',function(i){
+    var cu=AX.cu[i]||UN.indexOf(AX.u[i])<0;
+    return '<div><select onchange="axUnit('+i+',this.value)">'+UN.map(function(u){return '<option value="'+u+'"'+(!cu&&AX.u[i]===u?' selected':'')+'>'+(u||'(không có)')+'</option>'}).join('')+'<option value="__c"'+(cu?' selected':'')+'>Tùy chỉnh…</option></select>'+(cu?'<input type="text" value="'+esc(AX.u[i])+'" placeholder="Nhập đơn vị" oninput="axSet(\'u\','+i+',this.value)">':'')+'</div>';
+  });
+  h+=row('Bắt đầu từ',function(i){return inp('a',i,'0')});
+  h+=row('Kết thúc ở',function(i){return inp('b',i,'10')});
+  h+=row('Khoảng chia',function(i){return inp('s',i,'tự động')});
+  el.innerHTML=h+'</div>';
+  applyAx(true);
+}
+function openPc(){axForm();document.getElementById('pcm').classList.add('on')}
 function closePc(){document.getElementById('pcm').classList.remove('on')}
 function nf(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
 function updNp(keep){
@@ -120,7 +172,7 @@ function calcBox(k,VX,VY,g,u){
   var F={m:'x̄ = '+fr('x₁ + x₂ + … + xₙ','n'),md:'sắp xếp n giá trị tăng dần; n lẻ lấy giá trị ở giữa, n chẵn lấy trung bình cộng hai giá trị ở giữa',R:'R = giá trị lớn nhất − giá trị nhỏ nhất',s:'s² = '+fr('(x₁ − x̄)² + (x₂ − x̄)² + … + (xₙ − x̄)²','n')+', s = √s²'}[k];
   var h='<div class="calc"><div><span class="fm">Công thức:</span> '+F+'</div>';
   [[VX,'x',0],[VY,'y',1]].forEach(function(a){
-    h+='<div><span class="fm">Theo '+a[1]+(g?' ('+u[a[2]]+')':'')+':</span></div><div>'+calcOne(k,a[0],a[1])+'</div>';
+    h+='<div><span class="fm">Theo '+a[1]+up(g,a[2])+':</span></div><div>'+calcOne(k,a[0],a[1])+'</div>';
   });
   return h+'</div>';
 }
@@ -129,11 +181,11 @@ function cardParts(i){
   var c=cen[i],P=pts.filter(function(p){return p.c===i}),g=RG[ds],op=P.length?(opn[i]||null):null;
   var sc=function(v,k){return r1(g?real(v,k):v*100)},u=g?g.u:['đv','đv'],f=n1;
   var o={op:op,ch:null,tb:'',ht:''};
-  o.co='Tọa độ tâm: (<b>'+f(sc(c.x,0))+'</b>; <b>'+f(sc(c.y,1))+'</b>)'+(g?' theo ('+u[0]+', '+u[1]+')':'');
+  o.co='Tọa độ tâm: (<b>'+f(sc(c.x,0))+'</b>; <b>'+f(sc(c.y,1))+'</b>)'+tu(g);
   if(P.length){
     var VX=P.map(function(p){return sc(p.x,0)}),VY=P.map(function(p){return sc(p.y,1)}),X=stats(VX),Y=stats(VY);
     var row=function(n,k){return '<tr class="sr'+(op===k?' on':'')+'" data-k="'+k+'"><td>'+n+'</td><td>'+f(X[k])+'</td><td>'+f(Y[k])+'</td></tr>'};
-    o.tb='<table><tr><th></th><th>x'+(g?' ('+u[0]+')':'')+'</th><th>y'+(g?' ('+u[1]+')':'')+'</th></tr>'
+    o.tb='<table><tr><th></th><th>x'+up(g,0)+'</th><th>y'+up(g,1)+'</th></tr>'
       +row('Số trung bình x̄','m')+row('Trung vị Mₑ','md')+row('Khoảng biến thiên R','R')+row('Độ lệch chuẩn s','s')+'</table>';
     if(op)o.ch=calcBox(op,VX,VY,g,u);
     o.ht='';
@@ -264,12 +316,13 @@ function cardClick(e){
 function toggleInfo(i){
   var k=sel.indexOf(i);
   if(k>=0){sel.splice(k,1);delete opn[i];tone(400,.15,'sine',.04,260)}
-  else{sel.push(i);sel.sort();delete opn[i];selT[i]=now();tone(NOTES[i%6],.35,'sine',.05)}
+  else{sel.push(i);sel.sort(function(a,b){return a-b});delete opn[i];selT[i]=now();tone(NOTES[i%6],.35,'sine',.05)}
   renderInfo();
 }
-function tk(a,b,len,gap){
+function tk(a,b,len,gap,fx){
   var span=b-a,st=span,c=[1,2,5],e,j,r=[],k;
-  for(e=-2;e<=4;e++)for(j=0;j<3;j++){var q=c[j]*Math.pow(10,e);if(q/span*len>=gap&&q<st)st=q}
+  if(fx>0&&fx/span*len>=gap*.6)st=fx;
+  else for(e=-2;e<=4;e++)for(j=0;j<3;j++){var q=c[j]*Math.pow(10,e);if(q/span*len>=gap&&q<st)st=q}
   for(k=Math.ceil(a/st-1e-9);k*st<=b+1e-9;k++)r.push(parseFloat((k*st).toFixed(6)));
   return r;
 }
@@ -293,7 +346,7 @@ function ptEls(){if(pe)return;var w=document.getElementById('wrap');re=document.
 function ptHide(){psig='';if(pe){pe.style.display='none';re.style.display='none'}}
 function ptHtml(p){
   var g=RG[ds],u=g?g.u:[],h='<div class="ph"><b>Điểm dữ liệu</b><span class="x">✕</span></div>';
-  h+='<div>Tọa độ: (<b>'+n1(r1(g?real(p.x,0):p.x*100))+'</b>; <b>'+n1(r1(g?real(p.y,1):p.y*100))+'</b>)'+(g?' theo ('+u[0]+', '+u[1]+')':'')+'</div>';
+  h+='<div>Tọa độ: (<b>'+n1(r1(g?real(p.x,0):p.x*100))+'</b>; <b>'+n1(r1(g?real(p.y,1):p.y*100))+'</b>)'+tu(g)+'</div>';
   h+='<div>Thuộc: '+(p.c>=0&&cen[p.c]?'<i style="background:'+COL[p.c]+'"></i><b>Nhóm '+(p.c+1)+'</b>':'chưa chọn nhóm')+'</div>';
   var d=cen.map(function(c){return Math.hypot(p.x-c.x,p.y-c.y)*100}),b=d.indexOf(Math.min.apply(null,d));
   h+='<div class="hint">Khoảng cách đến tâm (thang 0–100)</div>';
@@ -324,8 +377,8 @@ function gtF(x){return String(parseFloat(x.toFixed(1)))}
 function gtDraw(){
   var g=RG[ds],nm=[g?g.xl:'Giá trị x',g?g.yl:'Giá trị y'],key=gv?'y':'x',i,mn=1e9,mx=-1e9;
   var V=pts.map(function(p){var v=r1(g?real(p[key],gv):p[key]*100);if(v<mn)mn=v;if(v>mx)mx=v;return v});
-  var lo=Math.floor(mn),B=[lo],cl=[],note;
-  if(gm==='eq'){var h=Math.max(1,Math.ceil((mx-lo+.1)/K));for(i=1;i<=K;i++)B.push(lo+i*h);note='Chia đều thành '+K+' lớp, mỗi lớp rộng '+h+'.'}
+  var lo=Math.floor(mn),B=[lo],cl=[],note,heq=Math.max(1,Math.ceil((mx-lo+.1)/K)),neq=Math.max(1,Math.ceil((mx-lo+.1)/heq));
+  if(gm==='eq'){for(i=1;i<=neq;i++)B.push(lo+i*heq);note='Chia đều thành '+neq+' lớp, mỗi lớp rộng '+heq+(neq<K?' (dữ liệu chỉ trải trong '+neq+' lớp nên không cần đủ '+K+' lớp).':'.')}
   else{
     var A={};pts.forEach(function(p,q){var o=A[p.c]||(A[p.c]={j:p.c,lo:1e9,hi:-1e9,s:0,n:0}),v=V[q];if(v<o.lo)o.lo=v;if(v>o.hi)o.hi=v;o.s+=v;o.n++});
     var L=Object.keys(A).filter(function(k){return +k>=0}).map(function(k){return A[k]}).sort(function(a,b){return a.s/a.n-b.s/b.n});
@@ -339,10 +392,10 @@ function gtDraw(){
   var F=B.slice(1).map(function(){return 0});
   V.forEach(function(v){for(var t=F.length-1;t>=0;t--)if(v>=B[t]){F[t]++;break}});
   var hd='<th>'+nm[gv]+'</th>',rw='<td>Số điểm</td>';
-  F.forEach(function(f,t){hd+='<th'+(gm==='km'?' style="border-bottom:6px solid '+COL[cl[t]%6]+'"':'')+'>['+gtF(B[t])+'; '+gtF(B[t+1])+')</th>';rw+='<td>'+nf(f)+'</td>'});
+  F.forEach(function(f,t){hd+='<th'+(gm==='km'?' style="border-bottom:6px solid '+COL[cl[t]%MAXK]+'"':'')+'>['+gtF(B[t])+'; '+gtF(B[t+1])+')</th>';rw+='<td>'+nf(f)+'</td>'});
   var seg=function(m,cur,items){return '<div class="row seg" style="margin:6px 0">'+items.map(function(t,k){return '<button class="'+(cur===(m?t[0]:k)?'on':'')+'" onclick="gtSet('+m+','+(m?"'"+t[0]+"'":k)+')">'+t[1]+'</button>'}).join('')+'</div>'};
   document.getElementById('gb').innerHTML='<div class="hint">Chọn biến để ghép nhóm</div>'+seg(0,gv,[[0,nm[0]],[1,nm[1]]])
-    +'<div class="hint">Cách chia lớp</div>'+seg(1,gm,[['km','Theo nhóm K-Means'],['eq','Chia đều '+K+' lớp']])
+    +'<div class="hint">Cách chia lớp</div>'+seg(1,gm,[['km','Theo nhóm K-Means'],['eq','Chia đều '+neq+' lớp']])
     +'<div style="overflow:auto"><table><tr>'+hd+'</tr><tr>'+rw+'</tr></table></div><div class="hint">Tổng: n = '+nf(V.length)+' điểm.</div>';gtFit();
 }
 function gtFit(){
@@ -352,29 +405,67 @@ function gtFit(){
 window.addEventListener('resize',function(){if(document.getElementById('gt').classList.contains('on'))gtFit()});
 function setAutoLabel(){document.getElementById('auto').textContent=auto?'Dừng':'Chạy tự động'}
 
-async function load(k){
-  if(busy){auto=false;return}
-  auto=false;setAutoLabel();hist=[];ds=k;pts=[];cen=[];phase=0;iter=0;done=false;rip=[];
-  var C={d8:[[155,45],[163,53],[171,63]],d9:[[5,3],[30,3],[18,14]]}[k],S={d8:[3,3],d9:[3,1.6]}[k];
-  if(!C){msg('Tự chấm điểm','Chạm vào khung trắng để thêm điểm dữ liệu.');panel();return}
-  K=3;document.getElementById('kval').textContent=K;
-  var tot=3*npg,list=[];
-  for(var i=0;i<npg;i++)for(var j=0;j<3;j++)
-    list.push({x:norm(r1(C[j][0]+gauss()*S[0]),0),y:norm(r1(C[j][1]+gauss()*S[1]),1)});
+function rd(v,d){var m=Math.pow(10,d);return Math.round(v*m)/m}
+function dpo(g,i){return g&&g.dp?g.dp[i]:1}
+var MAXT=100000;
+function resetData(k){auto=false;setAutoLabel();hist=[];ds=k;pts=[];cen=[];phase=0;iter=0;done=false;rip=[]}
+async function fill(list,title,body){
+  var tot=list.length,g=RG[ds];
   panel();setBusy(true);
-  msg('Đang tạo '+nf(tot)+' điểm…','Mỗi chấm là một dữ liệu ('+RG[k].xl+' và '+RG[k].yl+').');
+  msg('Đang tạo '+nf(tot)+' điểm…','Mỗi chấm là một dữ liệu ('+g.xl+' và '+g.yl+').');
   var dl=Math.max(16,Math.min(110,2600/tot)),ch=Math.max(1,Math.ceil(tot*dl/2600));
   for(var q=0;q<tot;q++){
     pts.push({x:list[q].x,y:list[q].y,c:-1,pu:now()});
     if(q%ch===ch-1||q===tot-1){pv++;tone(600+(q%6)*70,.04,'sine',.02);await sleep(dl)}
   }
   setBusy(false);
-  msg('Đã tạo '+nf(pts.length)+' điểm','Mỗi chấm là một dữ liệu ('+RG[k].xl+' và '+RG[k].yl+'). Nhấn "Bước tiếp" để bắt đầu.');
+  msg(title+' ('+nf(pts.length)+' điểm)',body);
   panel();
 }
+async function load(k){
+  if(busy){auto=false;return}
+  var P=PS[k];closePm();
+  resetData(k);
+  if(!P){msg('Tự chấm điểm','Chạm vào khung trắng để thêm điểm dữ liệu.');panel();return}
+  var G=P.c.length,n=Math.min(npg,Math.floor(MAXT/G)),list=[],i,j;
+  K=G;document.getElementById('kval').textContent=K;
+  for(i=0;i<n;i++)for(j=0;j<G;j++)
+    list.push({x:norm(rd(P.c[j][0]+gauss()*P.s[0],P.d[0]),0),y:norm(rd(P.c[j][1]+gauss()*P.s[1],P.d[1]),1)});
+  await fill(list,'Mẫu: '+P.n,'Mỗi chấm là một dữ liệu ('+P.xl+' và '+P.yl+'). Nhấn "Bước tiếp" để bắt đầu.');
+}
+/* Nút Ngẫu nhiên: K cụm ngẫu nhiên, mỗi cụm npg điểm, theo trục đang cấu hình */
+function rndCenters(G){
+  var best=null,bd=-1,t,i,j,c,m;
+  for(t=0;t<200;t++){
+    c=[];for(i=0;i<G;i++)c.push([.14+Math.random()*.72,.14+Math.random()*.72]);
+    m=9;for(i=0;i<G;i++)for(j=i+1;j<G;j++)m=Math.min(m,Math.hypot(c[i][0]-c[j][0],c[i][1]-c[j][1]));
+    if(m>bd){bd=m;best=c}
+  }
+  return best;
+}
+async function randomPts(){
+  if(busy){auto=false;return}
+  var k0=PS[ds]?ds:'free';resetData(k0);if(k0==='free')applyAx(true);
+  var g=RG[k0],G=K,n=Math.min(npg,Math.floor(MAXT/G)),C=rndCenters(G),S=C.map(function(){return (.045+Math.random()*.03)*Math.min(1,Math.sqrt(6/G)*1.1)}),list=[],i,j,vx,vy;
+  for(i=0;i<n;i++)for(j=0;j<G;j++){
+    vx=Math.min(.98,Math.max(.02,C[j][0]+gauss()*S[j]));vy=Math.min(.98,Math.max(.02,C[j][1]+gauss()*S[j]));
+    list.push({x:norm(rd(real(vx,0),dpo(g,0)),0),y:norm(rd(real(vy,1),dpo(g,1)),1)});
+  }
+  await fill(list,PS[k0]?'Ngẫu nhiên theo mẫu: '+PS[k0].n:'Điểm ngẫu nhiên','Máy rải ngẫu nhiên '+G+' cụm, mỗi cụm '+nf(n)+' điểm. Nhấn "Bước tiếp" để bắt đầu.');
+}
+function pmBuild(){
+  var el=document.getElementById('pmg');if(el.firstChild)return;
+  Object.keys(PS).forEach(function(k){
+    var P=PS[k],b=document.createElement('button'),sub=P.xl.replace(/\s*\(.*?\)/,'')+' – '+P.yl.replace(/\s*\(.*?\)/,'');
+    b.className='pb';b.innerHTML='<span>'+P.e+' '+esc(P.n)+'</span><small>'+esc(sub)+' · '+P.c.length+' nhóm</small>';
+    b.onclick=function(){load(k)};el.appendChild(b);
+  });
+}
+function openPm(){if(busy)return;pmBuild();document.getElementById('pm').classList.add('on')}
+function closePm(){document.getElementById('pm').classList.remove('on')}
 function setK(d){
   if(busy){auto=false;return}
-  auto=false;setAutoLabel();hist=[];K=Math.max(2,Math.min(6,K+d));document.getElementById('kval').textContent=K;restart();
+  auto=false;setAutoLabel();hist=[];var k2=Math.max(2,Math.min(MAXK,K+d));if(k2===K&&d>0)toast('Tối đa K = '+MAXK);K=k2;document.getElementById('kval').textContent=K;restart();
 }
 function restart(){
   if(busy){auto=false;return}
@@ -392,14 +483,18 @@ function clearAll(){
 async function init(){
   if(pts.length<K){msg('Chưa đủ điểm','Cần ít nhất '+K+' điểm. Hãy thêm điểm.');return false}
   setBusy(true);cen=[];
-  var idx=[];while(idx.length<K){var r=Math.floor(Math.random()*pts.length);if(idx.indexOf(r)<0)idx.push(r)}
+  var idx=[],tries=0,r,dup;
+  while(idx.length<K){r=Math.floor(Math.random()*pts.length);if(idx.indexOf(r)>=0)continue;
+    dup=tries<pts.length*4+200&&idx.some(function(q){return pts[q].x===pts[r].x&&pts[q].y===pts[r].y});tries++;
+    if(!dup)idx.push(r)}
   msg('Bước 1: Chọn ngẫu nhiên '+K+' tâm nhóm','Máy chưa biết các nhóm nằm ở đâu, nên chọn NGẪU NHIÊN '+K+' điểm làm "tâm nhóm" ban đầu.');
   await sleep(2200);
   for(var j=0;j<K;j++){
     msg('Đang chọn tâm nhóm '+(j+1)+' / '+K,'Chọn ngẫu nhiên một điểm làm tâm nhóm '+(j+1)+'.');
     var last=-1,T0=now(),HOP_MS=4000/spd;
     while(now()-T0<HOP_MS&&!skipF){
-      var s;do{s=Math.floor(Math.random()*pts.length)}while(s===last||idx.slice(0,j).indexOf(s)>=0);
+      var s,gd=0;do{s=Math.floor(Math.random()*pts.length);gd++}while((s===last||idx.slice(0,j).indexOf(s)>=0)&&gd<400);
+      if(idx.slice(0,j).indexOf(s)>=0)break;
       last=s;spot=s;tone(600+Math.random()*500,.05,'triangle',.035);
       await sleep(60*Math.pow(10,(now()-T0)/HOP_MS));
     }
@@ -490,7 +585,9 @@ cv.addEventListener('pointerdown',function(e){
     pts.splice(hit,1);hist.forEach(function(h){h.c.splice(hit,1)});
     tone(440,.12,'sine',.04,220);done=false;panel();return;
   }
-  tone(880,.07,'sine',.03);pts.push({x:Math.round((x-ML)/(W-ML-MR)*1000)/1000,y:Math.round((H-MB-y)/(H-MB-MT)*1000)/1000,c:-1,pu:now()});
+  var g0=RG[ds],qx=(x-ML)/(W-ML-MR),qy=(H-MB-y)/(H-MB-MT);
+  if(g0){qx=(rd(g0.x[0]+qx*(g0.x[1]-g0.x[0]),dpo(g0,0))-g0.x[0])/(g0.x[1]-g0.x[0]);qy=(rd(g0.y[0]+qy*(g0.y[1]-g0.y[0]),dpo(g0,1))-g0.y[0])/(g0.y[1]-g0.y[0])}
+  tone(880,.07,'sine',.03);pts.push({x:qx,y:qy,c:-1,pu:now()});
   done=false;panel();
 });
 /* Hiệu ứng nhấn nút: viền to ra rồi nhỏ lại, rung nhẹ */
@@ -507,9 +604,9 @@ function drawBig(){
     layer.width=Math.round(W*d);layer.height=Math.round(H*d);
     var l=layer.getContext('2d');l.setTransform(d,0,0,d,0,0);
     var n=pts.length,s=n<=10000?4:n<=30000?3:2,h=s/2,P=[],i,p,w=W-ML-MR,hh=H-MB-MT;
-    for(i=0;i<7;i++)P.push(new Path2D());
+    for(i=0;i<=MAXK;i++)P.push(new Path2D());
     for(i=0;i<n;i++){p=pts[i];P[p.c+1].rect(ML+p.x*w-h,H-MB-p.y*hh-h,s,s)}
-    for(i=0;i<7;i++){l.fillStyle=i?COL[i-1]:'#8895a5';l.fill(P[i])}
+    for(i=0;i<=MAXK;i++){l.fillStyle=i?COL[i-1]:'#8895a5';l.fill(P[i])}
     lk=key;
   }
   ctx.drawImage(layer,0,0,W,H);
@@ -520,9 +617,9 @@ function draw(){
   ctx.clearRect(0,0,W,H);ctx.font=Math.round(16*fz)+'px "Segoe UI",Arial';ctx.lineWidth=1;
   ctx.strokeStyle='#e3e9f0';ctx.fillStyle='#5b6b7e';
   if(g){
-    tk(g.x[0],g.x[1],W-ML-MR,52*fz).forEach(function(v){var q=(v-g.x[0])/(g.x[1]-g.x[0]);
+    tk(g.x[0],g.x[1],W-ML-MR,52*fz,g.s&&g.s[0]).forEach(function(v){var q=(v-g.x[0])/(g.x[1]-g.x[0]);
       ctx.beginPath();ctx.moveTo(px(q),py(0));ctx.lineTo(px(q),py(1));ctx.stroke();ctx.textAlign='center';ctx.fillText(v,px(q),py(0)+Math.round(22*fz))});
-    tk(g.y[0],g.y[1],H-MB-MT,38*fz).forEach(function(v){var q=(v-g.y[0])/(g.y[1]-g.y[0]);
+    tk(g.y[0],g.y[1],H-MB-MT,38*fz,g.s&&g.s[1]).forEach(function(v){var q=(v-g.y[0])/(g.y[1]-g.y[0]);
       ctx.beginPath();ctx.moveTo(px(0),py(q));ctx.lineTo(px(1),py(q));ctx.stroke();ctx.textAlign='right';ctx.fillText(v,px(0)-8,py(q)+5)});
   }else for(var i=0;i<=5;i++){var q=i/5;ctx.beginPath();ctx.moveTo(px(q),py(0));ctx.lineTo(px(q),py(1));ctx.moveTo(px(0),py(q));ctx.lineTo(px(1),py(q));ctx.stroke()}
   ctx.strokeStyle='#14202e';ctx.lineWidth=2;ctx.strokeRect(px(0),py(1),px(1)-px(0),py(0)-py(1));
@@ -588,10 +685,10 @@ function panel(){
   el.className='';el.innerHTML='';
   cen.forEach(function(c,i){
     var n=pts.filter(function(p){return p.c===i}).length,t='Nhóm '+(i+1)+': '+n+' điểm';
-    if(RG[ds]&&n){t+=' | tâm ≈ '+real(c.x,0).toFixed(1)+' '+RG[ds].u[0]+', '+real(c.y,1).toFixed(1)+' '+RG[ds].u[1]}
+    if(RG[ds]&&n){t+=' | tâm ≈ '+real(c.x,0).toFixed(1)+(RG[ds].u[0]?' '+RG[ds].u[0]:'')+', '+real(c.y,1).toFixed(1)+(RG[ds].u[1]?' '+RG[ds].u[1]:'')}
     var d=document.createElement('div');d.innerHTML='<i style="background:'+COL[i]+'"></i>';d.appendChild(document.createTextNode(t));el.appendChild(d);
   });
 }
 window.addEventListener('resize',resize);
-loadSet();applyFz();openHelp();
+loadSet();applyAx(true);applyFz();openHelp();
 (function loop(){draw();var t=now();if(pp){var ck=t-lastP>300;if(ck)lastP=t;ptUpdate(ck)}if(sel.length&&!dragging&&t-lastR>(pts.length>LG?1200:250)){lastR=t;renderInfo()}requestAnimationFrame(loop)})();

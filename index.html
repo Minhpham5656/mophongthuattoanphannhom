@@ -11,7 +11,7 @@
 <main>
   <div id="wrap"><canvas id="cv"></canvas><div id="info"></div><button id="closeall" onclick="hideInfo()">✕ Tắt tất cả</button><div id="toast"></div></div>
   <aside>
-    <div class="box" id="msg"><div id="mh">Chào mừng</div><div id="mb">Chạm vào màn hình để thêm điểm, hoặc chọn dữ liệu mẫu bên dưới.</div></div>
+    <div class="box" id="msg"><div id="mh">Chào mừng</div><div id="mb">Chạm vào màn hình để thêm điểm, chọn "Mẫu có sẵn", hoặc bấm "Ngẫu nhiên".</div></div>
     <div class="box"><b>Các nhóm</b><div id="list" class="hint">Chưa có nhóm nào.</div></div>
     <div class="box"><b>Chạy thuật toán</b>
       <div class="row">
@@ -26,10 +26,9 @@
       </div>
       <button id="gtb" style="display:none;width:100%;margin-top:8px" onclick="openGt()">📊 Lập bảng số liệu ghép nhóm</button>
     </div>
-    <div class="box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="margin:0">Dữ liệu</b><button style="flex:none;min-height:40px;padding:4px 14px;font-size:calc(16px*var(--fz))" onclick="openPc()">🔧 Cấu hình</button></div>
+    <div class="box"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px"><b style="margin:0">Dữ liệu</b><div style="display:flex;gap:6px;flex-wrap:wrap"><button style="flex:none;min-height:40px;padding:4px 8px;font-size:calc(15px*var(--fz))" onclick="randomPts()" title="Rải điểm ngẫu nhiên theo cấu hình">🎲 Ngẫu nhiên</button><button style="flex:none;min-height:40px;padding:4px 8px;font-size:calc(15px*var(--fz))" onclick="openPc()">🔧 Cấu hình</button></div></div>
       <div class="row">
-        <button onclick="load('d8')">Cỡ áo</button>
-        <button onclick="load('d9')">Mua xăng</button>
+        <button onclick="openPm()">📚 Mẫu có sẵn</button>
         <button onclick="load('free')">Tự chấm điểm</button>
       </div>
     </div>
@@ -47,11 +46,13 @@
 <div class="srow" style="justify-content:center"><button style="flex:none" onclick="resetSet()">Khôi phục mặc định</button></div>
 </div></div></div>
 <div id="pcm" onclick="if(event.target===this)closePc()"><div id="sp2">
-<div id="sh2"><b>🔧 Cấu hình dữ liệu mẫu</b><button style="flex:none;min-height:48px" onclick="closePc()">Đóng ✕</button></div>
+<div id="sh2"><b>🔧 Cấu hình</b><button style="flex:none;min-height:48px" onclick="closePc()">Đóng ✕</button></div>
 <div id="sb2">
 <div class="srow"><span>Số điểm mỗi nhóm</span><input id="npi" type="number" inputmode="numeric" min="2" max="33333" step="1" oninput="setNpgV(this.value,false)" onchange="setNpgV(this.value,true)" onfocus="this.select()"></div>
 <div class="srow" style="display:flex;flex-wrap:wrap;gap:8px"><button style="min-height:48px" onclick="setNpgV(10,true)">10</button><button style="min-height:48px" onclick="setNpgV(100,true)">100</button><button style="min-height:48px" onclick="setNpgV(1000,true)">1 000</button><button style="min-height:48px" onclick="setNpgV(10000,true)">10 000</button><button style="min-height:48px" onclick="setNpgV(33333,true)">33 333 (≈100 nghìn)</button></div>
+<div class="srow" style="flex-direction:column;align-items:stretch"><b>Trục tọa độ khi “Tự chấm điểm”</b><div id="axf"></div><button style="min-height:44px;align-self:flex-start;flex:none" onclick="axReset()">Khôi phục trục mặc định</button></div>
 </div></div></div>
+<div id="pm" onclick="if(event.target===this)closePm()"><div id="pmp"><div id="pmh"><b>📚 Mẫu có sẵn</b><button style="flex:none;min-height:48px" onclick="closePm()">Đóng ✕</button></div><div id="pmb"><div class="hint" style="margin:10px 0">Chọn một mẫu, máy sẽ tạo điểm theo cấu hình (số điểm mỗi nhóm).</div><div id="pmg"></div></div></div></div>
 <div id="gt" onclick="if(event.target===this)closeGt()"><div id="gp"><div id="gh"><b>📊 Bảng số liệu ghép nhóm</b><button style="flex:none;min-height:48px" onclick="closeGt()">Đóng ✕</button></div><div id="gb"></div></div></div>
 <div id="help" onclick="if(event.target===this)closeHelp()"><div id="hp">
 <div id="hh"><b>📖 Giải thích thuật toán K-Means</b><button style="flex:none;min-height:48px" onclick="closeHelp()">Đóng ✕</button></div>
