@@ -37,7 +37,7 @@
     </div>
   </aside>
 </main>
-<div id="set" onclick="if(event.target===this)closeSet()"><div id="sp">
+<div id="set" onclick="if(event.target===this)closeSet()"><div id="sp" role="dialog" aria-modal="true">
 <div id="sh"><b>Cài đặt</b><button style="flex:none;min-height:48px" onclick="closeSet()">Đóng ✕</button></div>
 <div id="sb">
 <div class="srow"><span>Cỡ chữ</span><div class="row"><button class="sq" onclick="setFz(-1)" aria-label="Giảm cỡ chữ">A−</button><span id="fzv">100%</span><button class="sq" onclick="setFz(1)" aria-label="Tăng cỡ chữ">A+</button></div></div>
@@ -46,16 +46,16 @@
 <div class="srow"><span>Âm thanh</span><button id="snd" onclick="toggleSnd()">Bật</button></div>
 <div class="srow" style="justify-content:center"><button style="flex:none" onclick="resetSet()">Khôi phục mặc định</button></div>
 </div></div></div>
-<div id="pcm" onclick="if(event.target===this)closePc()"><div id="sp2">
+<div id="pcm" onclick="if(event.target===this)closePc()"><div id="sp2" role="dialog" aria-modal="true">
 <div id="sh2"><b>Cấu hình</b><button style="flex:none;min-height:48px" onclick="closePc()">Đóng ✕</button></div>
 <div id="sb2">
 <div class="srow"><span>Số điểm mỗi nhóm</span><input id="npi" type="number" inputmode="numeric" min="2" max="33333" step="1" oninput="setNpgV(this.value,false)" onchange="setNpgV(this.value,true)" onfocus="this.select()"></div>
 <div class="srow" style="display:flex;flex-wrap:wrap;gap:8px"><button style="min-height:48px" onclick="setNpgV(10,true)">10</button><button style="min-height:48px" onclick="setNpgV(100,true)">100</button><button style="min-height:48px" onclick="setNpgV(1000,true)">1 000</button><button style="min-height:48px" onclick="setNpgV(10000,true)">10 000</button><button style="min-height:48px" onclick="setNpgV(33333,true)">33 333 (≈100 nghìn)</button></div>
 <div class="srow" style="flex-direction:column;align-items:stretch"><b>Trục tọa độ khi “Tự chấm điểm”</b><div id="axf"></div><button style="min-height:44px;align-self:flex-start;flex:none" onclick="axReset()">Khôi phục trục mặc định</button></div>
 </div></div></div>
-<div id="pm" onclick="if(event.target===this)closePm()"><div id="pmp"><div id="pmh"><b>Mẫu có sẵn</b><button style="flex:none;min-height:48px" onclick="closePm()">Đóng ✕</button></div><div id="pmb"><div class="hint" style="margin:10px 0">Chọn một mẫu, máy sẽ tạo điểm theo cấu hình (số điểm mỗi nhóm).</div><div id="pmg"></div></div></div></div>
-<div id="gt" onclick="if(event.target===this)closeGt()"><div id="gp"><div id="gh"><b>Bảng số liệu ghép nhóm</b><button style="flex:none;min-height:48px" onclick="closeGt()">Đóng ✕</button></div><div id="gb"></div></div></div>
-<div id="help" onclick="if(event.target===this)closeHelp()"><div id="hp">
+<div id="pm" onclick="if(event.target===this)closePm()"><div id="pmp" role="dialog" aria-modal="true"><div id="pmh"><b>Mẫu có sẵn</b><button style="flex:none;min-height:48px" onclick="closePm()">Đóng ✕</button></div><div id="pmb"><div class="hint" style="margin:10px 0">Chọn một mẫu, máy sẽ tạo điểm theo cấu hình (số điểm mỗi nhóm).</div><div id="pmg"></div></div></div></div>
+<div id="gt" onclick="if(event.target===this)closeGt()"><div id="gp" role="dialog" aria-modal="true"><div id="gh"><b>Bảng số liệu ghép nhóm</b><button style="flex:none;min-height:48px" onclick="closeGt()">Đóng ✕</button></div><div id="gb"></div></div></div>
+<div id="help" onclick="if(event.target===this)closeHelp()"><div id="hp" role="dialog" aria-modal="true">
 <div id="hh"><b>Giải thích thuật toán K-Means</b><button style="flex:none;min-height:48px" onclick="closeHelp()">Đóng ✕</button></div>
 <div id="hb">
 <h2>1. K-Means dùng để làm gì?</h2>

@@ -15,7 +15,47 @@ var PS={
  cam:{n:'Phân loại cam',x:[4,10],y:[50,350],xl:'Đường kính quả (cm)',yl:'Khối lượng quả (g)',u:['cm','g'],c:[[6,100],[7.3,170],[8.6,260]],s:[.3,14],d:[1,0]},
  dh:{n:'Đi học mỗi ngày',x:[0,15],y:[0,60],xl:'Khoảng cách nhà đến trường (km)',yl:'Thời gian đi (phút)',u:['km','phút'],c:[[1,14],[4,20],[11,35]],s:[.45,3],d:[1,0]},
  gn:{n:'Giấc ngủ và điện thoại',x:[4,11],y:[0,10],xl:'Giờ ngủ mỗi đêm (giờ)',yl:'Giờ dùng điện thoại mỗi ngày (giờ)',u:['giờ','giờ'],c:[[8.6,1.5],[7.2,4],[5.8,7]],s:[.35,.6],d:[1,1]},
- pt:{n:'Phòng trọ',x:[10,50],y:[0,6],xl:'Diện tích phòng (m²)',yl:'Giá thuê (triệu đồng/tháng)',u:['m²','triệu đồng'],c:[[15,1.2],[25,2.4],[40,4.2]],s:[2,.3],d:[1,1]}
+ pt:{n:'Phòng trọ',x:[10,50],y:[0,6],xl:'Diện tích phòng (m²)',yl:'Giá thuê (triệu đồng/tháng)',u:['m²','triệu đồng'],c:[[15,1.2],[25,2.4],[40,4.2]],s:[2,.3],d:[1,1]},
+/* Các mẫu bám ngữ cảnh thống kê trong SGK/SBT Toán 11 (Kết nối tri thức, Chân trời sáng tạo, Cánh diều); số liệu do máy mô phỏng */
+tvh:{n:'Xem ti vi và học bài',x:[0,6],y:[0,6],xl:'Thời gian xem ti vi (giờ/ngày)',yl:'Thời gian học bài (giờ/ngày)',u:['giờ','giờ'],c:[[.8,3.8],[2.3,2.4],[4.3,1.2]],s:[.35,.4],d:[1,1]},
+gb:{n:'Thời gian giải toán và điểm',x:[0,30],y:[0,10],xl:'Thời gian giải một bài toán (phút)',yl:'Điểm bài kiểm tra',u:['phút','điểm'],c:[[7,8.3],[22,8.3],[7,3.7],[22,4.3]],s:[2,.7],d:[0,1]},
+xa:{n:'Xà đơn và chạy 1000 m',x:[0,20],y:[3,8],xl:'Số lần kéo xà đơn (lần)',yl:'Thời gian chạy 1000 m (phút)',u:['lần','phút'],c:[[4,7],[9,5.6],[15,4.5]],s:[1.3,.3],d:[0,1]},
+td:{n:'Chạy 100 m và nhảy xa',x:[12,20],y:[1,3.2],xl:'Thời gian chạy 100 m (giây)',yl:'Thành tích nhảy xa (m)',u:['giây','m'],c:[[13.5,2.6],[16,2],[18.5,1.5]],s:[.5,.15],d:[1,2]},
+tvi:{n:'Mượn sách thư viện',x:[0,20],y:[0,10],xl:'Số quyển mượn mỗi học kỳ (quyển)',yl:'Thời gian ở thư viện (giờ/tuần)',u:['quyển','giờ'],c:[[3.5,1.6],[9,4],[15,7]],s:[1.2,.6],d:[0,1]},
+cg:{n:'Cây giống sau nảy mầm',x:[0,20],y:[0,12],xl:'Chiều cao cây (cm)',yl:'Số lá (lá)',u:['cm','lá'],c:[[4,3],[10,6],[16,9]],s:[1.2,.7],d:[1,0]},
+dua:{n:'Cây dừa giống',x:[0,24],y:[0,150],xl:'Tuổi cây (tháng)',yl:'Chiều cao (cm)',u:['tháng','cm'],c:[[4,30],[10,70],[18,115]],s:[1.2,8],d:[0,0]},
+ngan:{n:'Ngan nuôi thịt',x:[10,105],y:[0,6],xl:'Tuổi (ngày)',yl:'Cân nặng (kg)',u:['ngày','kg'],c:[[30,.8],[60,2.4],[88,4.7]],s:[4,.2],d:[0,1]},
+tx:{n:'Lái xe taxi',x:[0,30],y:[0,3],xl:'Số lượt chở khách mỗi ngày (lượt)',yl:'Doanh thu (triệu đồng/ngày)',u:['lượt','triệu đồng'],c:[[8,.7],[15,1.3],[24,2.2]],s:[1.5,.12],d:[0,1]},
+tr:{n:'Xe qua trạm thu phí',x:[40,140],y:[0,120],xl:'Tốc độ xe (km/h)',yl:'Khoảng cách giữa hai xe (m)',u:['km/h','m'],c:[[60,25],[85,50],[110,85]],s:[5,6],d:[0,0]},
+bao:{n:'Đọc báo điện tử',x:[0,20],y:[0,15],xl:'Thời gian mỗi lần truy cập (phút)',yl:'Số bài đã đọc (bài)',u:['phút','bài'],c:[[2,2],[7,5],[14,10]],s:[.9,.9],d:[1,0]},
+fb:{n:'Dùng mạng xã hội',x:[0,50],y:[0,300],xl:'Số lần mở ứng dụng (lần/ngày)',yl:'Tổng thời gian dùng (phút/ngày)',u:['lần','phút'],c:[[8,35],[22,95],[38,210]],s:[2.2,11],d:[0,0]},
+kem:{n:'Bán kem theo nhiệt độ',x:[10,42],y:[0,200],xl:'Nhiệt độ trong ngày (°C)',yl:'Số cây kem bán ra (cây/ngày)',u:['°C','cây'],c:[[16,25],[26,80],[35,160]],s:[1.6,10],d:[1,0]},
+cn:{n:'Công nhân và thu nhập',x:[0,30],y:[0,25],xl:'Thâm niên (năm)',yl:'Thu nhập (triệu đồng/tháng)',u:['năm','triệu đồng'],c:[[3,8],[10,13],[22,20]],s:[1.2,1],d:[0,1]},
+bh:{n:'Bảo hiểm nhân thọ',x:[15,70],y:[0,45],xl:'Tuổi khách hàng (tuổi)',yl:'Phí bảo hiểm (triệu đồng/năm)',u:['tuổi','triệu đồng'],c:[[28,8],[42,20],[58,32]],s:[3,2.5],d:[0,1]},
+bdn:{n:'Bóng đèn',x:[0,80],y:[0,35],xl:'Công suất (W)',yl:'Tuổi thọ (nghìn giờ)',u:['W','nghìn giờ'],c:[[9,28],[22,14],[60,6]],s:[2.5,1.8],d:[0,1]},
+mr:{n:'Giải chạy marathon',x:[2,7],y:[0,22],xl:'Thời gian hoàn thành (giờ)',yl:'Giờ tập luyện (giờ/tuần)',u:['giờ','giờ'],c:[[3,16],[4.3,10],[5.8,4]],s:[.3,1.5],d:[1,1]},
+/* Đợt 3: thêm các mẫu đời sống, nông nghiệp, thể thao, kinh tế; số liệu do máy mô phỏng */
+lua:{n:'Bón phân và năng suất lúa',x:[0,200],y:[20,80],xl:'Lượng phân đạm (kg/ha)',yl:'Năng suất lúa (tạ/ha)',u:['kg/ha','tạ/ha'],c:[[40,35],[90,50],[150,65]],s:[8,3],d:[0,1]},
+ga:{n:'Gà nuôi theo tuần tuổi',x:[0,14],y:[0,3],xl:'Tuổi gà (tuần)',yl:'Cân nặng (kg)',u:['tuần','kg'],c:[[3,.4],[7,1.2],[11,2.2]],s:[.5,.12],d:[0,2]},
+bus:{n:'Chờ xe buýt và độ hài lòng',x:[0,30],y:[0,10],xl:'Thời gian chờ xe (phút)',yl:'Mức hài lòng (điểm)',u:['phút','điểm'],c:[[5,8],[12,5.8],[22,3.5]],s:[1.4,.65],d:[0,1]},
+nuoc:{n:'Vận động và uống nước',x:[0,6],y:[0,4],xl:'Thời gian vận động (giờ/ngày)',yl:'Lượng nước uống (lít/ngày)',u:['giờ','lít'],c:[[.9,1.3],[2,2],[4.2,3.1]],s:[.3,.2],d:[1,1]},
+nd2:{n:'Nhiệt độ cao nhất và thấp nhất',x:[15,40],y:[5,32],xl:'Nhiệt độ cao nhất (°C)',yl:'Nhiệt độ thấp nhất (°C)',u:['°C','°C'],c:[[20,12],[28,22],[35,27]],s:[1.4,1.4],d:[0,0]},
+nha:{n:'Diện tích và giá nhà',x:[20,200],y:[0,10],xl:'Diện tích sử dụng (m²)',yl:'Giá bán (tỷ đồng)',u:['m²','tỷ đồng'],c:[[40,1.2],[80,3],[150,7]],s:[6,.5],d:[0,1]},
+xe:{n:'Tuổi xe và giá xe cũ',x:[0,15],y:[0,1000],xl:'Tuổi xe (năm)',yl:'Giá bán (triệu đồng)',u:['năm','triệu đồng'],c:[[1.5,800],[5,500],[10,200]],s:[.8,50],d:[1,0]},
+tt2:{n:'Cửa hàng tiện lợi',x:[0,80],y:[0,12],xl:'Số khách mỗi giờ (khách)',yl:'Thời gian chờ thanh toán (phút)',u:['khách','phút'],c:[[10,1.6],[35,3.6],[62,8]],s:[3.5,.5],d:[0,1]},
+gk:{n:'Điểm giữa kỳ và cuối kỳ',x:[0,10],y:[0,10],xl:'Điểm giữa kỳ',yl:'Điểm cuối kỳ',u:['điểm','điểm'],c:[[3.8,4.2],[6.2,6.5],[8.4,8.6]],s:[.5,.5],d:[1,1]},
+tc:{n:'Tuổi và chiều cao học sinh',x:[6,18],y:[110,190],xl:'Tuổi (tuổi)',yl:'Chiều cao (cm)',u:['tuổi','cm'],c:[[8,128],[12,150],[16,168]],s:[.6,4],d:[0,0]},
+bd:{n:'Cầu thủ ghi bàn và kiến tạo',x:[0,30],y:[0,15],xl:'Số bàn thắng mỗi mùa (bàn)',yl:'Số đường kiến tạo (lần)',u:['bàn','lần'],c:[[4,3],[12,9],[22,3.5]],s:[2,1.1],d:[0,0]},
+pin:{n:'Pin điện thoại',x:[2000,6000],y:[4,30],xl:'Dung lượng pin (mAh)',yl:'Thời gian sử dụng (giờ)',u:['mAh','giờ'],c:[[3000,9],[4200,15],[5200,24]],s:[150,1.3],d:[0,1]},
+gia:{n:'Giá bán và số phần bán',x:[10,60],y:[0,200],xl:'Giá bán một phần (nghìn đồng)',yl:'Số phần bán mỗi ngày (phần)',u:['nghìn đồng','phần'],c:[[15,160],[30,100],[50,40]],s:[2,10],d:[0,0]},
+ca:{n:'Cá nuôi trong ao',x:[0,12],y:[0,50],xl:'Tuổi cá (tháng)',yl:'Chiều dài cá (cm)',u:['tháng','cm'],c:[[2,8],[6,22],[10,38]],s:[.5,2.5],d:[1,0]},
+dap:{n:'Đạp xe đường dài',x:[0,60],y:[0,200],xl:'Quãng đường (km)',yl:'Thời gian đạp (phút)',u:['km','phút'],c:[[5,25],[20,70],[45,150]],s:[2,8],d:[0,0]},
+tv2:{n:'Tiền tiêu vặt',x:[0,100],y:[0,15],xl:'Tiền tiêu vặt (nghìn đồng/ngày)',yl:'Số lần mua đồ ăn vặt (lần/tuần)',u:['nghìn đồng','lần'],c:[[15,2.5],[40,6.5],[75,11]],s:[4,.8],d:[0,0]},
+bo:{n:'Hộ nuôi bò sữa',x:[0,40],y:[0,600],xl:'Số bò trong đàn (con)',yl:'Sản lượng sữa (lít/ngày)',u:['con','lít'],c:[[5,60],[15,200],[30,420]],s:[1.5,20],d:[0,0]},
+gh:{n:'Giao hàng theo quãng đường',x:[0,30],y:[0,100],xl:'Khoảng cách giao (km)',yl:'Phí giao hàng (nghìn đồng)',u:['km','nghìn đồng'],c:[[3,15],[10,35],[22,70]],s:[.9,4],d:[1,0]},
+mua:{n:'Lượng mưa và mực nước sông',x:[0,300],y:[0,10],xl:'Lượng mưa (mm)',yl:'Mực nước sông (m)',u:['mm','m'],c:[[40,2],[130,5],[240,8.3]],s:[12,.4],d:[0,1]},
+ie:{n:'Luyện nghe và điểm IELTS',x:[0,20],y:[3,9],xl:'Thời gian luyện nghe (giờ/tuần)',yl:'Điểm IELTS',u:['giờ','điểm'],c:[[4,5],[9,6.5],[16,8]],s:[1.2,.3],d:[0,1]},
+hoa:{n:'Hoa sau ngày gieo trồng',x:[0,40],y:[0,60],xl:'Thời gian trồng (ngày)',yl:'Chiều cao cây hoa (cm)',u:['ngày','cm'],c:[[7,8],[20,25],[33,48]],s:[2,4],d:[0,1]}
 };
 Object.keys(PS).forEach(function(k){var P=PS[k];RG[k]={x:P.x,y:P.y,xl:P.xl,yl:P.yl,u:P.u,dp:P.d}});
 var AX={n:['x','y'],u:['',''],cu:[false,false],a:['0','0'],b:['10','10'],s:['1','1']};
@@ -623,6 +663,12 @@ function drawBig(){
   ctx.drawImage(layer,0,0,W,H);
   if(spot>=0&&pts[spot]){var q=pts[spot];ctx.beginPath();ctx.arc(px(q.x),py(q.y),14,0,7);ctx.fillStyle=q.c<0?'#8895a5':COL[q.c];ctx.fill();ctx.lineWidth=3;ctx.strokeStyle='#f2a100';ctx.stroke()}
 }
+/* Vẽ chữ đậm tại gốc tọa độ hiện tại, tự thu nhỏ cho vừa bề rộng cho phép */
+function fitFill(t,maxW,size){
+  var f=size;ctx.font='bold '+f+'px "Segoe UI",Arial';
+  while(f>10&&ctx.measureText(t).width>maxW){f--;ctx.font='bold '+f+'px "Segoe UI",Arial'}
+  ctx.fillText(t,0,0);
+}
 function draw(){
   var t=now(),g=RG[ds],big=pts.length>LG;
   ctx.clearRect(0,0,W,H);ctx.font=Math.round(16*fz)+'px "Segoe UI",Arial';ctx.lineWidth=1;
@@ -634,9 +680,9 @@ function draw(){
       ctx.beginPath();ctx.moveTo(px(0),py(q));ctx.lineTo(px(1),py(q));ctx.stroke();ctx.textAlign='right';ctx.fillText(v,px(0)-8,py(q)+5)});
   }else for(var i=0;i<=5;i++){var q=i/5;ctx.beginPath();ctx.moveTo(px(q),py(0));ctx.lineTo(px(q),py(1));ctx.moveTo(px(0),py(q));ctx.lineTo(px(1),py(q));ctx.stroke()}
   ctx.strokeStyle=TC.ink;ctx.lineWidth=2;ctx.strokeRect(px(0),py(1),px(1)-px(0),py(0)-py(1));
-  if(g){ctx.fillStyle=TC.ink;ctx.font='bold '+Math.round(17*fz)+'px "Segoe UI",Arial';ctx.textAlign='center';
-    ctx.fillText(g.xl,(px(0)+px(1))/2,H-Math.round(10*fz));
-    ctx.save();ctx.translate(Math.round(16*fz),(py(0)+py(1))/2);ctx.rotate(-Math.PI/2);ctx.fillText(g.yl,0,0);ctx.restore()}
+  if(g){ctx.fillStyle=TC.ink;ctx.textAlign='center';
+    ctx.save();ctx.translate((px(0)+px(1))/2,H-Math.round(10*fz));fitFill(g.xl,px(1)-px(0),Math.round(17*fz));ctx.restore();
+    ctx.save();ctx.translate(Math.round(16*fz),(py(0)+py(1))/2);ctx.rotate(-Math.PI/2);fitFill(g.yl,py(0)-py(1),Math.round(17*fz));ctx.restore()}
   /* đèn chiếu */
   if(spot>=0&&pts[spot]){
     var s=pts[spot],X=px(s.x),Y=py(s.y),gr=ctx.createRadialGradient(X,Y,0,X,Y,90);
@@ -684,7 +730,8 @@ function draw(){
     ctx.lineWidth=4;ctx.strokeStyle=TC.ink;ctx.strokeRect(X-h,Y-h,2*h,2*h);
     ctx.lineWidth=2;ctx.strokeStyle=TC.out;ctx.strokeRect(X-h+3,Y-h+3,2*h-6,2*h-6);
     ctx.font='bold '+Math.round(16*fz)+'px "Segoe UI",Arial';ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle=TC.out;
-    ctx.strokeText('Tâm '+(i+1),X,Y-38);ctx.fillStyle=TC.ink;ctx.fillText('Tâm '+(i+1),X,Y-38);
+    var LX=Math.max(30,Math.min(W-30,X)),LY=Y-38<MT+12?Y+50:Y-38;
+    ctx.strokeText('Tâm '+(i+1),LX,LY);ctx.fillStyle=TC.ink;ctx.fillText('Tâm '+(i+1),LX,LY);
   });
 }
 function panel(){
@@ -701,6 +748,11 @@ function panel(){
   });
 }
 window.addEventListener('resize',resize);
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape')return;
+  var L=[['gt',closeGt],['pm',closePm],['pcm',closePc],['set',closeSet],['help',closeHelp]];
+  for(var n=0;n<L.length;n++){if(document.getElementById(L[n][0]).classList.contains('on')){L[n][1]();break}}
+});
 /* Cuộn bằng cách "cầm nắm" (kéo ngón tay / kéo chuột) song song với lăn chuột, có quán tính. Kéo quá 6px mới tính là cuộn, chạm bình thường vẫn bấm được nút. */
 function grabScroll(el,opt){
   if(!el||el._grab)return;el._grab=1;opt=opt||{};
@@ -728,12 +780,12 @@ function grabScroll(el,opt){
     var was=st.d;st=null;el.classList.remove('gr');
     if(!was)return;
     if(performance.now()-lt>90||(Math.abs(vx)<.05&&Math.abs(vy)<.05))return;
-    var f=10,px=vx*f,py=vy*f;
+    var f=10,ox=vx*f,oy=vy*f;
     (function step(){
-      px*=.93;py*=.93;
-      if(Math.abs(px)<.4&&Math.abs(py)<.4)return;
-      var a=el.scrollLeft,b=el.scrollTop;el.scrollLeft+=px;el.scrollTop+=py;
-      if(el.scrollLeft===a)px=0;if(el.scrollTop===b)py=0;
+      ox*=.93;oy*=.93;
+      if(Math.abs(ox)<.4&&Math.abs(oy)<.4)return;
+      var a=el.scrollLeft,b=el.scrollTop;el.scrollLeft+=ox;el.scrollTop+=oy;
+      if(el.scrollLeft===a)ox=0;if(el.scrollTop===b)oy=0;
       raf=requestAnimationFrame(step);
     })();
   }
@@ -752,7 +804,7 @@ function needDraw(t){
   if(!ok&&!big)for(i=0;i<pts.length;i++){p=pts[i];if(t-(p.pu||-1e9)<700||t-(p.ln||-1e9)<1000){ok=true;break}}
   if(!ok){
     if(!big)for(i=0;i<pts.length;i++)sm+=p_c(pts[i]);
-    sg=pv+'|'+pts.length+'|'+sm+'|'+W+'|'+H+'|'+ML+'|'+MB+'|'+theme+'|'+ds+'|'+fz+'|'+cen.length+'|'+(g?g.x+','+g.y+','+g.xl+','+g.yl:'');
+    sg=pv+'|'+pts.length+'|'+sm+'|'+W+'|'+H+'|'+ML+'|'+MB+'|'+theme+'|'+ds+'|'+fz+'|'+cen.length+'|'+(g?g.x+','+g.y+','+g.xl+','+g.yl+','+g.s+','+g.u:'');
     if(sg!==_sig){_sig=sg;ok=true}
   }
   if(ok)_ld=t;
