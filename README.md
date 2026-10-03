@@ -4,6 +4,14 @@ Trang web mô phỏng **từng bước** thuật toán K-Means, dùng trong gi�
 
 Không cần cài đặt, không cần máy chủ, không dùng thư viện ngoài. Chỉ gồm ba file HTML, CSS và JavaScript thuần.
 
+```
+├── index.html   khung giao diện và phần "Giải thích thuật toán"
+├── style.css    giao diện, gồm 4 theme (Sáng, Tối, Liquid Glass, Material 3)
+└── script.js    thuật toán, hiệu ứng, dữ liệu mẫu
+```
+
+**Chạy thử:** mở `index.html` bằng trình duyệt. **Đưa lên GitHub Pages:** đẩy cả ba file lên một repository, vào *Settings → Pages*, chọn nhánh chứa file rồi lưu.
+
 ---
 
 ## 1. K-Means dùng để làm gì?
@@ -85,7 +93,7 @@ Cho 4 điểm A(1; 1), B(2; 1), C(8; 8), D(9; 9). Chọn K = 2, lấy A và C l�
 | Bước 1: chọn tâm | Đèn chiếu quét qua các điểm rồi dừng ở điểm được chọn. Điểm đó trở thành ô vuông lớn có vòng tròn quay quanh, kèm nhãn "Tâm n". |
 | Bước 2: gán nhóm | Từng điểm được nối bằng một đường tới tâm gần nhất và đổi sang màu của tâm đó. |
 | Bước 3: dời tâm | Mỗi tâm trượt từ vị trí cũ sang vị trí trung bình mới, có đường nét đứt đánh dấu quãng đã dời. |
-| Lặp lại | Thanh thông báo đếm số vòng. Có thể bấm **Quay lại** để xem lại bước vừa chạy. |
+| Lặp lại | Khung thông báo cho biết đang ở vòng nào. Có thể bấm **Quay lại** để xem lại bước vừa chạy. |
 | Hội tụ | Khi tâm không dịch chuyển nữa, trang báo "Xong! Thuật toán đã hội tụ" kèm số vòng đã chạy. |
 
 Một vài chi tiết hay hỏi:
@@ -104,7 +112,7 @@ Một vài chi tiết hay hỏi:
 
 ## 9. Liên hệ với Toán 11
 
-Sau khi máy chia nhóm, ta dùng các số đặc trưng đã học (số trung bình, trung vị, khoảng biến thiên, độ lệch chuẩn) để mô tả từng nhóm: nhóm nào đông, nhóm nào tập trung, nhóm nào trải rộng. Trang có nút **Lập bảng số liệu ghép nhóm** để chuyển kết quả sang bảng tần số.
+Sau khi máy chia nhóm, ta dùng các số đặc trưng đã học (số trung bình, trung vị, khoảng biến thiên, độ lệch chuẩn) để mô tả từng nhóm: nhóm nào đông, nhóm nào tập trung, nhóm nào trải rộng. Trang có nút **Lập bảng số liệu ghép nhóm** để chuyển kết quả sang bảng tần số dạng các lớp [a; b).
 
 Khác với ghép nhóm số liệu: khi ghép nhóm, **con người** tự chia các khoảng; với K-Means, **máy tự tìm** cách chia dựa trên khoảng cách.
 
@@ -118,15 +126,39 @@ Câu hỏi gợi ý cho học sinh:
 
 ## Tính năng của trang
 
-**Chạy thuật toán:** các nút Quay lại, Bước tiếp, Chạy tự động, Làm lại, Xóa hết, Bỏ qua. K chọn từ 2 đến 16. Mỗi tâm có thẻ thông tin riêng, kéo di chuyển và phóng to, thu nhỏ được.
+### Chạy thuật toán
 
-**Dữ liệu:**
-- **Tự chấm điểm:** chạm vào khung trắng để thêm từng điểm.
-- **Mẫu có sẵn:** 14 mẫu thực tiễn: Cỡ áo, Mua xăng, Cỡ giày, Điểm Toán và Ngữ văn, Giờ tự học và điểm trung bình, Khách quán trà sữa, Thời tiết theo mùa, Buổi chạy bộ, Dùng điện thoại mỗi tháng, Hộ gia đình dùng điện, Phân loại cam, Đi học mỗi ngày, Giấc ngủ và điện thoại, Phòng trọ.
+- Các nút **Quay lại**, **Bước tiếp**, **Chạy tự động**, **Làm lại**, **Xóa hết**, **Bỏ qua** (nhảy ngay đến kết quả của bước đang chạy).
+- K chọn từ 2 đến 16.
+- Chạm vào một **tâm nhóm** để mở thẻ thông tin riêng: tọa độ tâm, số trung bình, trung vị, khoảng biến thiên, độ lệch chuẩn theo từng trục. Bấm tên một số đặc trưng để xem công thức và phép tính dạng phân số. Mở được nhiều thẻ cùng lúc; thẻ kéo di chuyển và phóng to, thu nhỏ được; nút **Tắt tất cả** đóng mọi thẻ.
+- Chạm vào một **điểm dữ liệu** (khi đã có tâm) để xem tọa độ, nhóm của điểm và khoảng cách đến từng tâm.
+- Sau khi hội tụ, nút **Lập bảng số liệu ghép nhóm** tạo bảng lớp [a; b) và tần số, chọn biến x hoặc y, chia theo nhóm K-Means hoặc chia đều.
+
+### Dữ liệu
+
+- **Tự chấm điểm:** chạm vào khung trắng để thêm từng điểm, chạm lại vào điểm để xóa (khi chưa chạy thuật toán).
+- **Mẫu có sẵn:** 52 mẫu thực tiễn, mỗi mẫu có tên trục và đơn vị riêng (xem danh sách bên dưới).
 - **Ngẫu nhiên:** rải K cụm ngẫu nhiên theo mẫu đang chọn, hoặc theo trục tự cấu hình khi ở chế độ tự chấm điểm.
-- **Cấu hình:** số điểm mỗi nhóm (tối đa khoảng 100 000 điểm), tên, đơn vị và khoảng giá trị của hai trục khi tự chấm điểm.
+- **Cấu hình:** số điểm mỗi nhóm (tối đa khoảng 100 000 điểm), tên, đơn vị, giá trị bắt đầu, kết thúc và khoảng chia của hai trục khi tự chấm điểm.
 
-**Cài đặt:** cỡ chữ, tốc độ chạy, âm thanh, và giao diện (Sáng, Tối, Liquid Glass, Material 3). Cài đặt được lưu trong trình duyệt.
+### Cài đặt
 
-**Màn hình cảm ứng:** cuộn bằng cách cầm nắm (kéo ngón tay hoặc chuột, có quán tính), nút to, có chế độ toàn màn hình.
+Cỡ chữ, giao diện (Sáng, Tối, Liquid Glass, Material 3), tốc độ chạy, âm thanh, khôi phục mặc định. Cài đặt được lưu trong trình duyệt.
 
+### Màn hình cảm ứng
+
+Cuộn bằng cách cầm nắm (kéo ngón tay hoặc chuột, có quán tính), nút to, không có thông báo nổi bật lên khi chạm nhầm, có chế độ toàn màn hình. Nhấn phím **Esc** để đóng hộp thoại đang mở.
+
+---
+
+## Danh sách 52 mẫu có sẵn
+
+Phần lớn mẫu bám theo ngữ cảnh thống kê trong sách giáo khoa và sách bài tập Toán 11. Số liệu do máy **mô phỏng**, không phải bảng số liệu gốc của sách.
+
+| Chủ đề | Các mẫu |
+|---|---|
+| Cơ thể, thể thao | Cỡ áo; Cỡ giày; Tuổi và chiều cao học sinh; Xà đơn và chạy 1000 m; Chạy 100 m và nhảy xa; Buổi chạy bộ; Giải chạy marathon; Đạp xe đường dài; Vận động và uống nước; Cầu thủ ghi bàn và kiến tạo |
+| Học tập | Điểm Toán và Ngữ văn; Giờ tự học và điểm trung bình; Giấc ngủ và điện thoại; Xem ti vi và học bài; Thời gian giải toán và điểm; Mượn sách thư viện; Đi học mỗi ngày; Điểm giữa kỳ và cuối kỳ; Luyện nghe và điểm IELTS; Tiền tiêu vặt |
+| Nông nghiệp, chăn nuôi | Phân loại cam; Cây giống sau nảy mầm; Cây dừa giống; Ngan nuôi thịt; Bón phân và năng suất lúa; Gà nuôi theo tuần tuổi; Cá nuôi trong ao; Hộ nuôi bò sữa; Hoa sau ngày gieo trồng |
+| Kinh tế, dịch vụ | Mua xăng; Khách quán trà sữa; Phòng trọ; Lái xe taxi; Công nhân và thu nhập; Bảo hiểm nhân thọ; Diện tích và giá nhà; Tuổi xe và giá xe cũ; Cửa hàng tiện lợi; Giá bán và số phần bán; Giao hàng theo quãng đường; Bán kem theo nhiệt độ |
+| Đời sống, công nghệ, thời tiết | Thời tiết theo mùa; Nhiệt độ cao nhất và thấp nhất; Lượng mưa và mực nước sông; Dùng điện thoại mỗi tháng; Pin điện thoại; Hộ gia đình dùng điện; Xe qua trạm thu phí; Đọc báo điện tử; Dùng mạng xã hội; Chờ xe buýt và độ hài lòng; Bóng đèn |
