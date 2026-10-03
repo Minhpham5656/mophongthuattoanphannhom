@@ -130,31 +130,3 @@ Câu hỏi gợi ý cho học sinh:
 
 **Màn hình cảm ứng:** cuộn bằng cách cầm nắm (kéo ngón tay hoặc chuột, có quán tính), nút to, có chế độ toàn màn hình.
 
-## Cách sử dụng
-
-### Chạy trực tiếp trên máy
-Tải mã nguồn về và mở file `index.html` bằng trình duyệt (Chrome, Edge hoặc Cốc Cốc bản mới).
-
-### Đăng lên GitHub Pages
-1. Tạo repository mới trên GitHub.
-2. Tải ba file `index.html`, `style.css`, `script.js` lên **thư mục gốc** (GitHub không tự giải nén file zip, cần giải nén trước).
-3. Vào **Settings, Pages**, ở mục **Branch** chọn nhánh `main` và thư mục `/ (root)`, bấm **Save**.
-4. Chờ khoảng một phút rồi mở `https://<tên-tài-khoản>.github.io/<tên-repository>/`.
-
-> **Lưu ý khi cập nhật:** trình duyệt có thể giữ bản cũ của `script.js` hoặc `style.css`. Nếu thấy lỗi hoặc thiếu tính năng sau khi cập nhật, hãy nhấn **Ctrl + F5**. Cần thay đủ cả ba file mỗi lần cập nhật.
-
-## Cấu trúc thư mục
-
-```
-.
-├── index.html   Giao diện, hộp thoại và phần giải thích thuật toán
-├── style.css    Kiểu hiển thị và bốn theme
-├── script.js    Thuật toán, dữ liệu mẫu, điều khiển và vẽ biểu đồ
-└── README.md
-```
-
-## Ghi chú kỹ thuật
-
-- Biểu đồ vẽ bằng Canvas. Khi có trên 3 000 điểm, chương trình vẽ gộp để vẫn mượt, và chỉ vẽ lại khi có thay đổi.
-- Theme Liquid Glass dùng `backdrop-filter`, nặng hơn các theme khác. Nếu máy yếu bị chậm, hãy chuyển sang theme Sáng hoặc Material 3.
-- Âm thanh dùng Web Audio API, tạo trực tiếp trong trình duyệt, không cần file âm thanh.
